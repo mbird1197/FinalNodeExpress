@@ -54,7 +54,7 @@ const getStateNickname = async (req, res) =>
 
 
     const code = req.code;
-    console.log(code);
+    
     const stateData = data.find(state => { 
         return state.code === code;
     });
@@ -96,15 +96,31 @@ const getStateAdmission = async (req, res) =>
 
 const getFunFact = async (req, res) => {
 
-    const code = req.params.code;
+    const stateCode = req.code;
+  
+    const state = await State.findOne({stateCode});
 
-    const state = await State.findOne({code});
+    if(state.funfacts.length === 0 || state.funfacts === undefined){
+        return res.status(204).json({message : 'There are no funfacts for ${state}'});
 
-    const randomFunFact = Math.floor(Math.random() * state.funfacts.length)
+    }
+        
+    else{
+    const randomFunFact = Math.floor(Math.random() * state.funfacts.length);
 
-    res.json({'funfact' : state.funfacts[randomFunFact]});
-    
+        res.json({'funfact' : state.funfacts[randomFunFact]});
+
+
+    }
+
+
+
+
 }
+    
+    
+    
+
 
 
 const addFunFact = async (req, res) => {
