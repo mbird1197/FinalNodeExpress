@@ -101,7 +101,7 @@ const getFunFact = async (req, res) => {
     const state = await State.findOne({stateCode});
 
     if(state.funfacts.length === 0 || state.funfacts === undefined){
-        return res.status(204).json({message : 'There are no funfacts for ${state}'});
+        res.json({message : `No Fun Facts found for Georgia`});
 
     }
         
