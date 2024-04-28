@@ -1,5 +1,5 @@
 const data = require('../model/statesData.json');
-
+const State = require('../model/State');
 
 
 

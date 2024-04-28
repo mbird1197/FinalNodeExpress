@@ -13,7 +13,7 @@ const verifyStateCodes = (req, res, next) => {
   }
 
   if (!isStateAbbreviationValid(upperCaseCode)) {
-      return res.status(404).send({'error': 'Not a valid state.'});
+      return res.status(404).send({'message' : 'Invalid state abbreviation parameter'});
   }
 
   // Set the state code in the request object
