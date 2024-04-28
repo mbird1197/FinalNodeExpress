@@ -75,7 +75,7 @@ const getStatePopulation = async (req, res) =>
         return state.code === code;
     });
 
-    res.json({ 'state': stateData.state, 'population': stateData.population.toString() });
+    res.json({ 'state': stateData.state, 'population': stateData.population.toLocaleString() });
 
 }
 
