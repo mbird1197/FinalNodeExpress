@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const StateSchema = new Schema({
+const stateSchema = new Schema({
 
     stateCode: {
         
@@ -21,5 +21,5 @@ const StateSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('State', StateSchema );
+module.exports = mongoose.model('State', stateSchema );
 
