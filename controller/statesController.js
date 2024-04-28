@@ -17,12 +17,12 @@ const getAllStates = async (req, res) => {
 const getSingleState = async (req, res) => {
 
     const code = req.code;
-    console.log(code);
+   
     const stateData = data.find(state => { 
         return state.code === code;
     });
 
-// Do something with specificEntry
+
 
 res.json(stateData);
 
@@ -59,7 +59,7 @@ const getStateNickname = async (req, res) =>
         return state.code === code;
     });
 
-    res.json({ state: stateData.state, nickname: stateData.nickname });
+    res.json({ 'state': stateData.state, 'nickname': stateData.nickname });
 
 }
 
@@ -75,7 +75,7 @@ const getStatePopulation = async (req, res) =>
         return state.code === code;
     });
 
-    res.json({ state: stateData.state, population: stateData.population });
+    res.json({ 'state': stateData.state, 'population': stateData.population });
 
 }
 
@@ -89,7 +89,7 @@ const getStateAdmission = async (req, res) =>
         return state.code === code;
     });
 
-    res.json({ state: stateData.state, admission: stateData.admission_date });
+    res.json({ 'state': stateData.state, 'admission': stateData.admission_date });
 
 }
 
