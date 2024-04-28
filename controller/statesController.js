@@ -89,7 +89,7 @@ const getStateAdmission = async (req, res) =>
         return state.code === code;
     });
 
-    res.json({ 'state': stateData.state, 'admission': stateData.admission_date });
+    res.json({ 'state': stateData.state, 'admitted': stateData.admission_date });
 
 }
 
