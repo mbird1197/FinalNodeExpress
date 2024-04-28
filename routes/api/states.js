@@ -2,13 +2,55 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const statesController = require('../../controller/statesController');
-const data = {};
-data.statesData = require('../../model/statesData.json');
+const verifyStateCodes = require('../../middleware/verifyStates');
+
+const data = require('../../model/statesData.json');
 
 router.route('/')
 .get((req, res) => {
-    res.json(data.statesData);
+
+///states/?contig=true 
+
+const contig = req.query.contig;
+if(contig == "true"){
+    
+    const responseData = data.filter( (state )=> {
+
+        return (state.code != "AK" && state.code != "HI");
+
+    } )
+
+    return res.json(responseData);
+}
+if(contig == 'false'){
+
+    const responseData = data.filter( (state )=> {
+
+        return (state.code == "AK" || state.code == "HI");
+
+    } )
+    return res.json(responseData);
+
+}
+
+
+
+    res.json(data);
 })
 
+router.get('/:state', verifyStateCodes, statesController.getSingleState);
+
+router.get('/:state/capital', verifyStateCodes, statesController.getStateCapital);
+
+router.get('/:state/nickname', verifyStateCodes, statesController.getStateNickname);
+router.get('/:state/population', verifyStateCodes, statesController.getStatePopulation);
+router.get('/:state/admission', verifyStateCodes, statesController.getStateAdmission);
+
+
+
+
+
+
+//
 
 module.exports = router;

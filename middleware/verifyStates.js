@@ -1,34 +1,26 @@
 const statesData = require('../model/statesData.json');
-const express = require('express');
-const app = express();
 
 
 const verifyStateCodes = (req, res, next) => {
+ 
+  const stateCode = req.params.state;
+  const upperCaseCode = stateCode.toUpperCase();
+  const statesCodes = statesData.map(state => state.code);
 
-app.get('/states/:state', (req, res, next) =>{
+  function isStateAbbreviationValid(upperCaseCode) {
+      const foundState = statesCodes.find(state => state === upperCaseCode);
+      return foundState !== undefined;
+  }
 
-    const stateCode = req.params.state;
+  if (!isStateAbbreviationValid(upperCaseCode)) {
+      return res.status(404).send({'error': 'Not a valid state.'});
+  }
 
-    const upperCaseCode = stateCode.toUpperCase();
+  // Set the state code in the request object
+  req.code = upperCaseCode;
 
-    const statesCodes = statesData.map(state => state.stateCode);
-   
-    function isStateAbbreviationValid(stateCode) {
-       
-        const foundState = statesCodes.find(state => state === stateCode);
-        
-       return foundState !== undefined;
-        
-      }
-
-
-      if(!isStateAbbreviationValid(upperCaseCode)){
-        return res.status(404).send({'error' : 'Not a valid state.'});
-      }
-    req.code = upperCaseCode;
-
-    next();
-})
+  // Call next to move to the next middleware or route handler
+  next();
 
 
 

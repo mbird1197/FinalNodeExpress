@@ -28,14 +28,11 @@ app.get('/' , (req, res) => {
 })
 app.use('/states', require('./routes/api/states'));
 
-/*app.get('/states/', (req, res) => {
-
-res.json(statesData);
 
 
-})
 
-*/ 
+
+
 
 //
 
