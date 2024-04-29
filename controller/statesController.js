@@ -140,9 +140,9 @@ const getFunFact = async (req, res) => {
 
 }
     
-    
+  */  
 
-/*
+
 
 const addFunFact = async (req, res) => {
 
@@ -174,7 +174,7 @@ const addFunFact = async (req, res) => {
 
 
 }
-
+/*
 const updateFunFact = async (req, res ) => {
 
     const state = await State.findOne({stateCode: req.code})
@@ -252,7 +252,7 @@ module.exports = {
       getStatePopulation,
        getStateAdmission, 
        //getFunFact,
-    //addFunFact,
+    addFunFact,
    // updateFunFact,
    // deleteFunFact 
 };
