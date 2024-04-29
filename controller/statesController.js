@@ -7,9 +7,8 @@ const State = require('../model/State');
 
 const getAllStates = async (req, res) => {
 
-    const states = await State.find();
-    if(!states) return res.status(204).json({ 'message' : 'No states found.'});
-    res.json(states);
+    
+    res.json(data);
 
     
 }
@@ -93,14 +92,19 @@ const getStateAdmission = async (req, res) =>
 
 }
 
-/*
+
 const getFunFact = async (req, res) => {
 
-    const stateCode = req.code;
+   
     
-  
-    const state = await State.findOne({stateCode});
+    const code = req.params.state.toUpperCase();
+    
+    const statecode = data.states.find( state => state.code == code);
+    const state = await State.findOne({statecode: code}).exec();
 
+    if(state.funfacts.length === 0 || state.funfacts === undefined){
+        res.status(201).json({message : `No fun facts for ${State.state}`});
+    }
     
         
   
@@ -109,15 +113,11 @@ const getFunFact = async (req, res) => {
         res.json({'funfact' : state.funfacts[randomFunFact]});
 
 
-    
-
-
-
 
 
 }
     
-    */
+    
 
 /*
 
@@ -151,7 +151,7 @@ module.exports = {
      getStateNickname,
       getStatePopulation,
        getStateAdmission, 
-      // getFunFact,
+       getFunFact,
     //addFunFact 
 };
 
