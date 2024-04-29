@@ -94,14 +94,14 @@ const getStateAdmission = async (req, res) =>
 }
 
 
-const getFunFact = async (req, res) => {
+/*const getFunFact = async (req, res) => {
 
     const stateCode = req.code;
   
     const state = await State.findOne({stateCode});
 
     if(state.funfacts.length === 0 || state.funfacts === undefined){
-        res.json({message : `No Fun Facts found for Georgia`});
+        res.status(204).json({message : `No Fun Facts found for Georgia`});
 
     }
         
@@ -116,7 +116,7 @@ const getFunFact = async (req, res) => {
 
 
 
-}
+
     
     
     
@@ -143,8 +143,8 @@ const addFunFact = async (req, res) => {
     }
 
 
+*/
 
-}
 
 module.exports = { 
     getAllStates, 
@@ -153,7 +153,8 @@ module.exports = {
      getStateNickname,
       getStatePopulation,
        getStateAdmission, 
-       getFunFact,
-    addFunFact };
+       //getFunFact,
+    //addFunFact 
+};
 
 
