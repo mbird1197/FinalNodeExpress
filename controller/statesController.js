@@ -210,7 +210,7 @@ const updateFunFact = async (req, res ) => {
 
 }
 
-
+*/
 const deleteFunFact = async (req, res) => {
 
     const state = await State.findOne({stateCode: req.code})
@@ -243,7 +243,7 @@ const deleteFunFact = async (req, res) => {
     res.json(state);
 }
 
-*/
+
 module.exports = { 
     getAllStates, 
     getSingleState,
@@ -254,7 +254,7 @@ module.exports = {
        //getFunFact,
     addFunFact,
    // updateFunFact,
-   // deleteFunFact 
+    deleteFunFact 
 };
 
 
