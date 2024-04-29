@@ -97,14 +97,12 @@ const getFunFact = async (req, res) => {
 
    
     
-    const code = req.params.state.toUpperCase();
+    const stateCode = req.code;
     
-    const statecode = data.states.find( state => state.code == code);
-    const state = await State.findOne({statecode: code}).exec();
+    
+    const state = await State.findOne({stateCode});
 
-    if(state.funfacts.length === 0 || state.funfacts === undefined){
-        res.status(201).json({message : `No fun facts for ${State.state}`});
-    }
+    
     
         
   
