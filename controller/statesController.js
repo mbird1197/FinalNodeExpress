@@ -121,7 +121,7 @@ const getStateAdmission = async (req, res) =>
 
 }
     
-    */
+    
 
 
 
@@ -224,7 +224,7 @@ const deleteFunFact = async (req, res) => {
     res.json(state);
 }
 
-
+*/
 module.exports = { 
     getAllStates, 
     getSingleState,
@@ -233,9 +233,9 @@ module.exports = {
       getStatePopulation,
        getStateAdmission, 
        //getFunFact,
-    addFunFact,
-    updateFunFact,
-    deleteFunFact 
+    //addFunFact,
+   // updateFunFact,
+   // deleteFunFact 
 };
 
 
