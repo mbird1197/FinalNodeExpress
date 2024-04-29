@@ -101,19 +101,15 @@ const getFunFact = async (req, res) => {
   
     const state = await State.findOne({stateCode});
 
-    if (state.funfacts === undefined || state.funfacts.length === 0) {
-        return res.status(404).json({message : 'No Fun Facts found for Georgia'}); 
     
-
-    }
         
-    else{
+  
     const randomFunFact = Math.floor(Math.random() * state.funfacts.length);
 
         res.json({'funfact' : state.funfacts[randomFunFact]});
 
 
-    }
+    
 
 
 
