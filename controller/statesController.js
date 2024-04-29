@@ -5,18 +5,6 @@ const State = require('../model/State');
 
 
 
-/*
-const data = {
-
-
-    states: require('../model/statesData.json'),
-    setStates: function (data) {this.}
-
-
-
-}
-*/
-
 const getAllStates = async (req, res) => {
 
     
