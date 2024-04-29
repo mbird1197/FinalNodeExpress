@@ -1,8 +1,27 @@
 
 const State = require('../model/State');
-const data = require('../model/statesData.json');
 
 
+
+const data = {
+    states: require('../model/statesData.json'),
+    setStates: function (data) {this.states = data}
+};
+
+async function mergeModels(){
+
+    for(const state in data.states){
+
+        const fact = await State.findOne({statecode: data.states[state].code}).exec();
+        if(fact){
+
+            data.states[state].funfacts = fact.funfacts;
+
+        }
+      }
+}
+
+mergeModels();
 
 
 const getAllStates = async (req, res) => {
@@ -17,7 +36,7 @@ const getSingleState = async (req, res) => {
 
     const code = req.code;
    
-    const stateData = data.find(state => { 
+    const stateData = data.states.find(state => { 
         return state.code === code;
     });
 
@@ -35,7 +54,7 @@ const getStateCapital = async (req, res) => {
 
     const code = req.code;
     console.log(code);
-    const stateData = data.find(state => { 
+    const stateData = data.states.find(state => { 
         return state.code === code;
     });
 
@@ -54,7 +73,7 @@ const getStateNickname = async (req, res) =>
 
     const code = req.code;
     
-    const stateData = data.find(state => { 
+    const stateData = data.states.find(state => { 
         return state.code === code;
     });
 
@@ -70,7 +89,7 @@ const getStatePopulation = async (req, res) =>
 
     const code = req.code;
 
-    const stateData = data.find(state => { 
+    const stateData = data.states.find(state => { 
         return state.code === code;
     });
 
@@ -84,7 +103,7 @@ const getStateAdmission = async (req, res) =>
 
     const code = req.code;
     
-    const stateData = data.find(state => { 
+    const stateData = data.states.find(state => { 
         return state.code === code;
     });
 
@@ -99,7 +118,7 @@ const getFunFact = async (req, res) => {
     
     const stateCode = req.code;
     
-    const stateName = data.find(state => {
+    const stateName = data.states.find(state => {
 
         return state.code === stateCode;
     }).state;
