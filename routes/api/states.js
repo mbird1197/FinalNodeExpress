@@ -45,7 +45,7 @@ router.get('/:state/population', verifyStateCodes, statesController.getStatePopu
 router.get('/:state/admission', verifyStateCodes, statesController.getStateAdmission);
 //router.get('/:state/funfact', verifyStateCodes, statesController.getFunFact);
 router.post('/:state/funfact', verifyStateCodes, statesController.addFunFact );
-//router.patch('/:state/funfact', verifyStateCodes, statesController.updateFunFact);
+router.patch('/:state/funfact', verifyStateCodes, statesController.updateFunFact);
 router.delete('/:state/funfact', verifyStateCodes, statesController.deleteFunFact);
 
 
