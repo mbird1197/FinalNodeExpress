@@ -99,12 +99,18 @@ const getFunFact = async (req, res) => {
     
     const stateCode = req.code;
     
-    
+    const stateName = data.find(state => {
+
+        return state.code === stateCode;
+    }).state;
     const state = await State.findOne({stateCode});
 
+   
     
-    
-        
+    if(!state.funfacts || state.funfacts.length == 0){
+
+        return res.status(404).json({message : `No fun facts for ${stateName}`});
+    }      
   
     const randomFunFact = Math.floor(Math.random() * state.funfacts.length);
 
@@ -117,30 +123,107 @@ const getFunFact = async (req, res) => {
     
     
 
-/*
+
 
 const addFunFact = async (req, res) => {
 
+    if(!req.body.funfacts || req.body.funfacts.length == 0){
+        return res.status(400).json({message: 'Please provide funfacts array'});
 
+    }
     try{
 
-
+        const state = await State.findOne({stateCode: req.code})
+        if(state){
+           const updatedState = await State.findOneAndUpdate({ stateCode : req.code } , { $push : {funfacts:{$each: req.body.funfacts }  } }, {new: true});
+           console.log(updatedState);
+            return res.json(updatedState);
+        }
 
         const newData = new State({
-
-            stateCode: req.body.code,
+            
+            stateCode: req.code,
             funfacts: req.body.funfacts
         });
 
         await newData.save();
+        res.json(newData);
     }catch(err){
         console.error(err);
         res.status(500).send('Error adding funfact');
     }
 
 
-}}
-*/
+}
+
+const updateFunFact = async (req, res ) => {
+
+    const state = await State.findOne({stateCode: req.code})
+    if(!state){
+      
+        return res.status(400).json({message: 'State does not exist'});
+    }
+
+    const { funfactIndex , newFunFact} = req.body;
+    if(!funfactIndex || funfactIndex <= 0 || !newFunFact){
+        return res.status(400).json({message: 'No fun facts found'});
+
+    }
+    if(!state.funfacts || state.funfacts.length === 0){
+        return res.status(400).json({message: 'No fun facts array' });
+    }
+
+    state.funfacts = state.funfacts.map( (fact, index ) => {
+
+        if(funfactIndex === index + 1){
+            return newFunFact;
+        }
+        else{
+            return fact;
+        }
+
+    })
+
+    await state.save();
+     res.json(state);
+
+
+
+}
+
+
+const deleteFunFact = async (req, res) => {
+
+    const state = await State.findOne({stateCode: req.code})
+    if(!state){
+      
+        return res.status(400).json({message: 'State does not exist'});
+    }
+
+    const {index } = req.body;
+    if(!index || index <= 0){
+
+        return res.status(400).json({message: 'No index exists'});
+    }
+
+    
+    if(!state.funfacts || state.funfacts.length === 0){
+        return res.status(400).json({message: 'No fun facts array' });
+    }
+
+    state.funfacts = state.funfacts.filter( (fact, idx) => {
+
+        if(index == idx + 1){
+            return false;
+        }
+        return true;
+    })
+
+
+    await state.save();
+    res.json(state);
+}
+
 
 module.exports = { 
     getAllStates, 
@@ -150,7 +233,9 @@ module.exports = {
       getStatePopulation,
        getStateAdmission, 
        getFunFact,
-    //addFunFact 
+    addFunFact,
+    updateFunFact,
+    deleteFunFact 
 };
 
 
