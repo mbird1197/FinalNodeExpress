@@ -45,7 +45,7 @@ router.get('/:state/capital', verifyStateCodes, statesController.getStateCapital
 router.get('/:state/nickname', verifyStateCodes, statesController.getStateNickname);
 router.get('/:state/population', verifyStateCodes, statesController.getStatePopulation);
 router.get('/:state/admission', verifyStateCodes, statesController.getStateAdmission);
-router.get('/:state/funfact', verifyStateCodes, statesController.getFunFact);
+//router.get('/:state/funfact', verifyStateCodes, statesController.getFunFact);
 
 
 

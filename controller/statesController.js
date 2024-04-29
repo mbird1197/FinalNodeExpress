@@ -94,7 +94,7 @@ const getStateAdmission = async (req, res) =>
 }
 
 
-const getFunFact = async (req, res) => {
+/*const getFunFact = async (req, res) => {
 
     const stateCode = req.code;
     
@@ -146,7 +146,7 @@ const addFunFact = async (req, res) => {
 
 
 }}
-
+*/
 
 module.exports = { 
     getAllStates, 
@@ -155,7 +155,7 @@ module.exports = {
      getStateNickname,
       getStatePopulation,
        getStateAdmission, 
-       getFunFact,
+       //getFunFact,
     //addFunFact 
 };
 
