@@ -31,7 +31,7 @@ res.json(stateData);
 
 const getStateCapital = async (req, res) => {
 
-//{ ‘state’: stateName, ‘capital’: capitalName }
+
 
     const code = req.code;
     console.log(code);
@@ -93,7 +93,7 @@ const getStateAdmission = async (req, res) =>
 }
 
 
-/*const getFunFact = async (req, res) => {
+const getFunFact = async (req, res) => {
 
    
     
@@ -123,7 +123,7 @@ const getStateAdmission = async (req, res) =>
     
     
 
-
+/*
 
 const addFunFact = async (req, res) => {
 
@@ -232,7 +232,7 @@ module.exports = {
      getStateNickname,
       getStatePopulation,
        getStateAdmission, 
-       //getFunFact,
+       getFunFact,
     //addFunFact,
    // updateFunFact,
    // deleteFunFact 
