@@ -26,47 +26,55 @@ mergeModels();
 
 const getAllStates = async (req, res) => {
 
-    const contig = req.query.contig;
-    let _data = data.states;
-    if(contig == "true"){
-    
-    const responseData = data.states.filter( (state )=> {
+    router.route('/')
+.get(async(req, res) => {
 
-        return (state.code != "AK" && state.code != "HI");
 
-    } )
 
-    _data = responseData;
+
+const contig = req.query.contig;
+if(contig == "true"){
+
+const responseData = data.filter( (state )=> {
+
+return (state.code != "AK" && state.code != "HI");
+
+} )
+
+return res.json(responseData);
 }
-    if(contig == 'false'){
+if(contig == 'false'){
 
-    const responseData = data.states.filter( (state )=> {
+const responseData = data.filter( (state )=> {
 
-        return (state.code == "AK" || state.code == "HI");
+return (state.code == "AK" || state.code == "HI");
 
-    } )
-        _data = responseData;
+} )
+return res.json(responseData);
 
 }
-    
-    const stateWithFunFacts = [];
-    for(const state of _data ){
-        const stateResult = await State.findOne({stateCode : state.code});
-        if(stateResult){
-            stateWithFunFacts.push({
-                ...state, 
-                funfacts: stateResult.funfacts
-            })
-        }
-        else{
-            stateWithFunFacts.push({ ...state, funfacts: []});
-        }
-        
-    }
-   
-    res.json(stateWithFunFacts);
+const stateWithFunFacts = [];
+const states = await State.find({})
+for(const state of data ){
+const funfactState = states.find(st => st.stateCode === state.code)
 
-    
+if(funfactState){
+stateWithFunFacts.push({
+...state,
+funfacts: funfactState.funfacts
+})
+}
+else{
+stateWithFunFacts.push({ ...state});
+}
+
+}
+
+res.json(stateWithFunFacts);
+
+
+})
+
 }
 
 const getSingleState = async (req, res) => {
