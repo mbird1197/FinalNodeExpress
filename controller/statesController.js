@@ -231,16 +231,9 @@ const addFunFact = async (req, res) => {
 // /states/KS/funfact endpoint PATCH request will return a message saying 'No Fun Fact found at that index for Kansas' if no fun fact exists to update at the provided index.
 
 const updateFunFact = async (req, res ) => {
-
-    const state = await State.findOne({stateCode: req.code})
-    if(!state){
-      
-        return res.status(400).json({message: 'State does not exist'});
-    }
-
     
-
     const { index , funfact} = req.body;
+
     if(!index || index <= 0 ){
         return res.status(400).json({message: 'State fun fact index value required'});
 
@@ -249,9 +242,26 @@ const updateFunFact = async (req, res ) => {
     if(!funfact){
         return res.status(400).json({message: 'State fun fact value required'});
     }
+    const stateCode = req.code;
+    
+    const stateName = data.states.find(state => {
 
-    if(!state.funfacts || state.funfacts.length === 0){
-        return res.status(400).json({message: 'No fun facts array' });
+        return state.code === stateCode;
+    }).state;
+
+    const state = await State.findOne({stateCode: req.code})
+    if(!state){
+      
+        return res.status(400).json({message: `No Fun Facts found for ${stateName}`});
+    }
+
+    
+
+    
+    
+
+    if(index > state.funfacts.length ){
+        return res.status(400).json({message: `No Fun Fact found at that index for ${stateName}` });
     }
 
     state.funfacts = state.funfacts.map( (fact, idx ) => {
