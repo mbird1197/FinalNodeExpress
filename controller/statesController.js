@@ -26,12 +26,7 @@ mergeModels();
 
 const getAllStates = async (req, res) => {
 
-    router.route('/')
-.get(async(req, res) => {
-
-
-
-
+    
 const contig = req.query.contig;
 if(contig == "true"){
 
@@ -73,9 +68,9 @@ stateWithFunFacts.push({ ...state});
 res.json(stateWithFunFacts);
 
 
-})
-
 }
+
+
 
 const getSingleState = async (req, res) => {
 
