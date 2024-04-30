@@ -6,6 +6,7 @@ const verifyStateCodes = require('../../middleware/verifyStates');
 const State = require('../../model/State');
 const data = require('../../model/statesData.json');
 
+
 router.route('/')
 .get(async(req, res) => {
 
@@ -14,45 +15,94 @@ router.route('/')
 
 const contig = req.query.contig;
 if(contig == "true"){
-    
-    const responseData = data.filter( (state )=> {
 
-        return (state.code != "AK" && state.code != "HI");
+const responseData = data.filter( (state )=> {
 
-    } )
+return (state.code != "AK" && state.code != "HI");
 
-    return res.json(responseData);
+} )
+
+return res.json(responseData);
 }
 if(contig == 'false'){
 
-    const responseData = data.filter( (state )=> {
+const responseData = data.filter( (state )=> {
 
-        return (state.code == "AK" || state.code == "HI");
+return (state.code == "AK" || state.code == "HI");
 
-    } )
-    return res.json(responseData);
+} )
+return res.json(responseData);
 
 }
 const stateWithFunFacts = [];
+const states = await State.find({})
 for(const state of data ){
-    const stateResult = await State.findOne({stateCode : state.code});
-    if(stateResult){
-        stateWithFunFacts.push({
-            ...state, 
-            funfacts: stateResult.funfacts
-        })
-    }
-    else{
-        stateWithFunFacts.push({ ...state});
-    }
-    
+const funfactState = states.find(st => st.stateCode === state.code)
+
+if(funfactState){
+stateWithFunFacts.push({
+...state,
+funfacts: funfactState.funfacts
+})
+}
+else{
+stateWithFunFacts.push({ ...state});
+}
+
 }
 
 res.json(stateWithFunFacts);
 
 
-    //res.json(data);
+//res.json(data);
 })
+// router.route('/')
+// .get(async(req, res) => {
+
+
+
+
+// const contig = req.query.contig;
+// if(contig == "true"){
+    
+//     const responseData = data.filter( (state )=> {
+
+//         return (state.code != "AK" && state.code != "HI");
+
+//     } )
+
+//     return res.json(responseData);
+// }
+// if(contig == 'false'){
+
+//     const responseData = data.filter( (state )=> {
+
+//         return (state.code == "AK" || state.code == "HI");
+
+//     } )
+//     return res.json(responseData);
+
+// }
+// const stateWithFunFacts = [];
+// for(const state of data ){
+//     const stateResult = await State.findOne({stateCode : state.code});
+//     if(stateResult){
+//         stateWithFunFacts.push({
+//             ...state, 
+//             funfacts: stateResult.funfacts
+//         })
+//     }
+//     else{
+//         stateWithFunFacts.push({ ...state});
+//     }
+    
+// }
+
+// res.json(stateWithFunFacts);
+
+
+//     //res.json(data);
+// })
 
 //router.get('/', verifyStateCodes, statesController.getAllStates)
 
