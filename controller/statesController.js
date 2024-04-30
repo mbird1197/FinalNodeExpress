@@ -111,24 +111,24 @@ const getStateAdmission = async (req, res) =>
 
 }
 
-/*
+
 const getFunFact = async (req, res) => {
 
    
     
-    const stateCode = req.code;
+    const code = req.params.state.toUpperCase();
     
-    const stateName = data.states.find(state => {
+    const statecode = data.states.find(state => {
 
-        return state.code === stateCode;
+        return state.code === code;
     }).state;
-    const state = await State.findOne({stateCode});
+    const state = await State.findOne({statecode: code}).exec();
 
    
     
     if(!state.funfacts || state.funfacts.length == 0){
 
-        return res.status(404).json({message : `No fun facts for ${stateName}`});
+        return res.status(404).json({message : `No fun facts for ${State.state}`});
     }      
   
     const randomFunFact = Math.floor(Math.random() * state.funfacts.length);
@@ -140,7 +140,7 @@ const getFunFact = async (req, res) => {
 
 }
     
-  */  
+  
 
 
 
@@ -251,7 +251,7 @@ module.exports = {
      getStateNickname,
       getStatePopulation,
        getStateAdmission, 
-       //getFunFact,
+       getFunFact,
     addFunFact,
     updateFunFact,
     deleteFunFact 
