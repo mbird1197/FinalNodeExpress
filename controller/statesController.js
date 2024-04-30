@@ -128,7 +128,7 @@ const getFunFact = async (req, res) => {
     
     if(!state || !state.funfacts || state.funfacts.length == 0){
 
-        return res.status(404).json({message : `No Fun Facts for ${stateName}`});
+        return res.status(404).json({message : `No Fun Facts found for ${stateName}`});
     }      
   
     const randomFunFact = Math.floor(Math.random() * state.funfacts.length);
