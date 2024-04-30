@@ -183,14 +183,18 @@ const getFunFact = async (req, res) => {
 }
     
   
-
+// /states/TX/funfact endpoint POST request will return a message saying 'State fun facts value required' if no funfacts are in the body of the request.‣
+// /states/UT/funfact endpoint POST request will return a message saying 'State fun facts value must be an array' if funfacts are not provided in an array.
 
 
 const addFunFact = async (req, res) => {
 
-    if(!req.body.funfacts || req.body.funfacts.length == 0){
-        return res.status(400).json({message: 'Please provide funfacts array'});
+    if(!req.body.funfacts){
+        return res.status(400).json({message: 'State fun facts value required'});
 
+    }
+    if(!Array.isArray(req.body.funfacts)){
+        return res.status(404).json({message: 'State fun facts value must be an array'});
     }
     try{
 
