@@ -9,7 +9,7 @@ const data = require('../../model/statesData.json');
 router.route('/')
 .get(async(req, res) => {
 
-///states/?contig=true 
+
 
 
 const contig = req.query.contig;
@@ -34,27 +34,27 @@ if(contig == 'false'){
 
 }
 const stateWithFunFacts = [];
-for(const state of data ){
-    const stateResult = await State.findOne({stateCode : state.code});
-    if(stateResult){
-        stateWithFunFacts.push({
-            ...state, 
-            funfacts: stateResult.funfacts
-        })
-    }
-    else{
-        stateWithFunFacts.push({ ...state, funfacts: []});
-    }
+// for(const state of data ){
+//     const stateResult = await State.findOne({stateCode : state.code});
+//     if(stateResult){
+//         stateWithFunFacts.push({
+//             ...state, 
+//             funfacts: stateResult.funfacts
+//         })
+//     }
+//     else{
+//         stateWithFunFacts.push({ ...state, funfacts: []});
+//     }
     
-}
+// }
 
-res.json(stateWithFunFacts);
+res.json(data);
 
 
     //res.json(data);
 })
 
-router.get('/', verifyStateCodes, statesController.getAllStates)
+//router.get('/', verifyStateCodes, statesController.getAllStates)
 
 router.get('/:state', verifyStateCodes, statesController.getSingleState);
 router.get('/:state/capital', verifyStateCodes, statesController.getStateCapital);
