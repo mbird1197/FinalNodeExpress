@@ -72,11 +72,16 @@ const getAllStates = async (req, res) => {
 const getSingleState = async (req, res) => {
 
     const code = req.code;
+
+    const state = await State.findOne({stateCode: code});
+    
    
     const stateData = data.states.find(state => { 
         return state.code === code;
     });
-
+    if(state && state.funfacts){
+        stateData.funfacts = state.funfacts;
+    }
 
 
 res.json(stateData);
