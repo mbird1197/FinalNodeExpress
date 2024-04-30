@@ -59,7 +59,7 @@ const getAllStates = async (req, res) => {
             })
         }
         else{
-            stateWithFunFacts.push({ ...state, funfacts: []});
+            stateWithFunFacts.push({ ...state});
         }
         
     }
