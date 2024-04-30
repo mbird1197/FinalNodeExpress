@@ -4,39 +4,9 @@ const path = require('path');
 const statesController = require('../../controller/statesController');
 const verifyStateCodes = require('../../middleware/verifyStates');
 
-const data = require('../../model/statesData.json');
-
-router.route('/')
-.get((req, res) => {
-
-///states/?contig=true 
-
-const contig = req.query.contig;
-if(contig == "true"){
-    
-    const responseData = data.filter( (state )=> {
-
-        return (state.code != "AK" && state.code != "HI");
-
-    } )
-
-    return res.json(responseData);
-}
-if(contig == 'false'){
-
-    const responseData = data.filter( (state )=> {
-
-        return (state.code == "AK" || state.code == "HI");
-
-    } )
-    return res.json(responseData);
-
-}
 
 
-
-    res.json(data);
-})
+router.get('/', statesController.getAllStates);
 
 router.get('/:state', verifyStateCodes, statesController.getSingleState);
 router.get('/:state/capital', verifyStateCodes, statesController.getStateCapital);

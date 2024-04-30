@@ -25,9 +25,25 @@ mergeModels();
 
 
 const getAllStates = async (req, res) => {
-
     
-    res.json(data);
+    const stateWithFunFacts = [];
+    for(const state of data.states ){
+        const stateResult = await State.findOne({stateCode : state.code});
+        if(stateResult){
+            stateWithFunFacts.push({
+                ...state, 
+                funfacts: stateResult.funfacts
+            })
+        }
+        else{
+            stateWithFunFacts.push(state);
+        }
+        
+        
+
+    }
+   
+    res.json(stateWithFunFacts);
 
     
 }
