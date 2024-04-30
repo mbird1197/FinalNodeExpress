@@ -283,17 +283,22 @@ const updateFunFact = async (req, res ) => {
 }
 
 
-// /states/NE/funfact endpoint DELETE request should delete the fun fact at the provided index property. REMEMBER: Provided indexes should start a 1, not zero.‣
-// /states/OR/funfact endpoint DELETE request should return a JSON object with 4 properties and represent the updated data. REMEMBER: Provided indexes should start a 1, not zero.‣
-// /states/WY/funfact endpoint DELETE request will return a message saying 'State fun fact index value required' if no index is provided in the body of the request.‣
-// /states/MT/funfact endpoint DELETE request will return a message saying 'No Fun Facts found for Montana' if no funfacts exist to delete.‣
-// /states/CO/funfact endpoint DELETE request will return a message saying 'No Fun Fact found at that index for Colorado' if no fun fact exists to delete at the provided index.
+//states/WY/funfact endpoint DELETE request will return a message saying 'State fun fact index value required' if no index is provided in the body of the request.‣
+// /states/MT/funfact endpoint DELETE request will return a message saying 'No Fun Facts found for Montana' if no funfacts exist to delete.
 
 const deleteFunFact = async (req, res) => {
+
+    const {index } = req.body;
+    if(!index || index <= 0){
+
+        return res.status(400).json({message: 'State fun fact index value required'});
+    }
 
     const state = await State.findOne({stateCode: req.code})
     const stateCode = req.code;
     
+
+
     const stateName = data.states.find(state => {
 
         return state.code === stateCode;
@@ -301,14 +306,10 @@ const deleteFunFact = async (req, res) => {
 
     if(!state){
       
-        return res.status(400).json({message: 'State does not exist'});
+        return res.status(400).json({message: `No Fun Facts found for ${stateName}`});
     }
 
-    const {index } = req.body;
-    if(!index || index <= 0){
-
-        return res.status(400).json({message: 'State fun fact index value required'});
-    }
+    
 
     
 
