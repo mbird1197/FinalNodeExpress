@@ -25,9 +25,32 @@ mergeModels();
 
 
 const getAllStates = async (req, res) => {
+
+    const contig = req.query.contig;
+    let _data = data.states;
+    if(contig == "true"){
+    
+    const responseData = data.states.filter( (state )=> {
+
+        return (state.code != "AK" && state.code != "HI");
+
+    } )
+
+    _data = responseData;
+}
+    if(contig == 'false'){
+
+    const responseData = data.states.filter( (state )=> {
+
+        return (state.code == "AK" || state.code == "HI");
+
+    } )
+        _data = responseData;
+
+}
     
     const stateWithFunFacts = [];
-    for(const state of data.states ){
+    for(const state of _data ){
         const stateResult = await State.findOne({stateCode : state.code});
         if(stateResult){
             stateWithFunFacts.push({
@@ -39,8 +62,6 @@ const getAllStates = async (req, res) => {
             stateWithFunFacts.push({ ...state, funfacts: []});
         }
         
-        
-
     }
    
     res.json(stateWithFunFacts);
