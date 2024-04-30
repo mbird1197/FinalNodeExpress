@@ -154,7 +154,7 @@ const addFunFact = async (req, res) => {
 
         const state = await State.findOne({stateCode: req.code})
         if(state){
-           const updatedState = await State.findOneAndUpdate({ stateCode : req.code } , { $push : {funfacts:{$each: req.body.funfacts }  } }, {new: true});
+           const updatedState = await State.findOneAndUpdate({ stateCode : req.code } ,  { $push : { funfacts : req.body.funfacts }   }, {new: true});
            console.log(updatedState);
             return res.json(updatedState);
         }
