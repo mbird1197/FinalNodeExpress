@@ -221,6 +221,15 @@ const addFunFact = async (req, res) => {
 
 }
 
+
+
+// /states/NE/funfact endpoint PATCH request should update the fun fact at the provided index property. REMEMBER: Provided indexes should start a 1, not zero.‣
+// /states/NE/funfact endpoint PATCH request should return a JSON object with 4 properties and represent the updated data. REMEMBER: Provided indexes should start a 1, not zero.‣
+// /states/MI/funfact endpoint PATCH request will return a message saying 'State fun fact index value required' if no index is provided in the body of the request.‣
+// /states/CT/funfact endpoint PATCH request will return a message saying 'State fun fact value required' if a funfact property is not provided with a string value.‣
+// /states/AZ/funfact endpoint PATCH request will return a message saying 'No Fun Facts found for Arizona' if no funfacts exist to update.‣
+// /states/KS/funfact endpoint PATCH request will return a message saying 'No Fun Fact found at that index for Kansas' if no fun fact exists to update at the provided index.
+
 const updateFunFact = async (req, res ) => {
 
     const state = await State.findOne({stateCode: req.code})
@@ -229,8 +238,8 @@ const updateFunFact = async (req, res ) => {
         return res.status(400).json({message: 'State does not exist'});
     }
 
-    const { funfactIndex , newFunFact} = req.body;
-    if(!funfactIndex || funfactIndex <= 0 || !newFunFact){
+    const { index , funfact} = req.body;
+    if(!index || index <= 0 || !funfact){
         return res.status(400).json({message: 'No fun facts found'});
 
     }
@@ -238,10 +247,10 @@ const updateFunFact = async (req, res ) => {
         return res.status(400).json({message: 'No fun facts array' });
     }
 
-    state.funfacts = state.funfacts.map( (fact, index ) => {
+    state.funfacts = state.funfacts.map( (fact, idx ) => {
 
-        if(funfactIndex === index + 1){
-            return newFunFact;
+        if(index === idx + 1){
+            return funfact;
         }
         else{
             return fact;
