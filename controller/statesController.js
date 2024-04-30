@@ -116,19 +116,19 @@ const getFunFact = async (req, res) => {
 
    
     
-    const code = req.params.state.toUpperCase();
+    const stateCode = req.code;
     
-    const statecode = data.states.find(state => {
+    const stateName = data.states.find(state => {
 
-        return state.code === code;
+        return state.code === stateCode;
     }).state;
-    const state = await State.findOne({statecode: code}).exec();
+    const state = await State.findOne({stateCode});
 
    
     
-    if(!state.funfacts || state.funfacts.length == 0){
+    if(!state || !state.funfacts || state.funfacts.length == 0){
 
-        return res.status(404).json({message : `No fun facts for ${State.state}`});
+        return res.status(404).json({message : `No fun facts for ${stateName}`});
     }      
   
     const randomFunFact = Math.floor(Math.random() * state.funfacts.length);
