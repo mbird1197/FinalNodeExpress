@@ -238,11 +238,18 @@ const updateFunFact = async (req, res ) => {
         return res.status(400).json({message: 'State does not exist'});
     }
 
+    
+
     const { index , funfact} = req.body;
-    if(!index || index <= 0 || !funfact){
-        return res.status(400).json({message: 'No fun facts found'});
+    if(!index || index <= 0 ){
+        return res.status(400).json({message: 'State fun fact index value required'});
 
     }
+
+    if(!funfact){
+        return res.status(400).json({message: 'State fun fact value required'});
+    }
+
     if(!state.funfacts || state.funfacts.length === 0){
         return res.status(400).json({message: 'No fun facts array' });
     }
