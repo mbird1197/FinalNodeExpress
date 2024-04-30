@@ -34,21 +34,21 @@ if(contig == 'false'){
 
 }
 const stateWithFunFacts = [];
-// for(const state of data ){
-//     const stateResult = await State.findOne({stateCode : state.code});
-//     if(stateResult){
-//         stateWithFunFacts.push({
-//             ...state, 
-//             funfacts: stateResult.funfacts
-//         })
-//     }
-//     else{
-//         stateWithFunFacts.push({ ...state, funfacts: []});
-//     }
+for(const state of data ){
+    const stateResult = await State.findOne({stateCode : state.code});
+    if(stateResult){
+        stateWithFunFacts.push({
+            ...state, 
+            funfacts: stateResult.funfacts
+        })
+    }
+    else{
+        stateWithFunFacts.push({ ...state});
+    }
     
-// }
+}
 
-res.json(data);
+res.json(stateWithFunFacts);
 
 
     //res.json(data);
