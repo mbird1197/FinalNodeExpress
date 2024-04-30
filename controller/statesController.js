@@ -36,7 +36,7 @@ const getAllStates = async (req, res) => {
             })
         }
         else{
-            stateWithFunFacts.push(state);
+            stateWithFunFacts.push({ ...state, funfacts: []});
         }
         
         
