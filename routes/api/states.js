@@ -5,10 +5,12 @@ const statesController = require('../../controller/statesController');
 const verifyStateCodes = require('../../middleware/verifyStates');
 const State = require('../../model/State');
 const data = require('../../model/statesData.json');
+const data1 = require('../../model/statesData.json');
 
 
 
-router.get('/', statesController.getAllStates)
+
+router.get('/', statesController.getAllStates);
 router.get('/:state', verifyStateCodes, statesController.getSingleState);
 router.get('/:state/capital', verifyStateCodes, statesController.getStateCapital);
 router.get('/:state/nickname', verifyStateCodes, statesController.getStateNickname);
