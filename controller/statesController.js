@@ -188,8 +188,6 @@ const getFunFact = async (req, res) => {
 }
     
   
-// /states/TX/funfact endpoint POST request will return a message saying 'State fun facts value required' if no funfacts are in the body of the request.‣
-// /states/UT/funfact endpoint POST request will return a message saying 'State fun facts value must be an array' if funfacts are not provided in an array.
 
 
 const addFunFact = async (req, res) => {
@@ -228,12 +226,7 @@ const addFunFact = async (req, res) => {
 
 
 
-// /states/NE/funfact endpoint PATCH request should update the fun fact at the provided index property. REMEMBER: Provided indexes should start a 1, not zero.‣
-// /states/NE/funfact endpoint PATCH request should return a JSON object with 4 properties and represent the updated data. REMEMBER: Provided indexes should start a 1, not zero.‣
-// /states/MI/funfact endpoint PATCH request will return a message saying 'State fun fact index value required' if no index is provided in the body of the request.‣
-// /states/CT/funfact endpoint PATCH request will return a message saying 'State fun fact value required' if a funfact property is not provided with a string value.‣
-// /states/AZ/funfact endpoint PATCH request will return a message saying 'No Fun Facts found for Arizona' if no funfacts exist to update.‣
-// /states/KS/funfact endpoint PATCH request will return a message saying 'No Fun Fact found at that index for Kansas' if no fun fact exists to update at the provided index.
+
 
 const updateFunFact = async (req, res ) => {
     
@@ -288,8 +281,7 @@ const updateFunFact = async (req, res ) => {
 }
 
 
-//states/WY/funfact endpoint DELETE request will return a message saying 'State fun fact index value required' if no index is provided in the body of the request.‣
-// /states/MT/funfact endpoint DELETE request will return a message saying 'No Fun Facts found for Montana' if no funfacts exist to delete.
+
 
 const deleteFunFact = async (req, res) => {
 
